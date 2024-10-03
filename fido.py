@@ -1,8 +1,9 @@
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
-from app.authent import authenticate_user, create_access_token, decode_token
-from app.crud import create_user, get_user, update_user, delete_user
-from app.models import UserCreate, UserUpdate
+from authent import authenticate_user, create_access_token, decode_token
+from crud import create_user, get_user, update_user, delete_user
+from models import UserCreate, UserUpdate
+
 
 app = FastAPI()
 
@@ -40,3 +41,4 @@ def api_update_user(username: str, user: UserUpdate, current_user: str = Depends
 @app.delete("/users/{username}")
 def api_delete_user(username: str, current_user: str = Depends(get_current_user)):
     return delete_user(username)
+
